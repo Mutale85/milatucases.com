@@ -1,0 +1,112 @@
+.report-textarea {
+background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Times New Roman', serif;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 20px;
+}
+
+
+
+.modal-fullscreen {
+    max-width: 100%;
+    margin: 0;
+    height: 100%;
+}
+
+  .modal-fullscreen .modal-content {
+      height: 100%;
+      border-radius: 0;
+  }
+
+  .modal-fullscreen .modal-body {
+      overflow-y: auto;
+  }
+  .modal-body {
+      position: relative;
+      flex: 1 1 auto;
+      padding: 1.5rem;
+      background: #fff;
+  }
+  .modal-footer {
+    background: #fff;
+  }
+
+  .editor-toolbar {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .editor-toolbar button {
+    background-color: transparent;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+
+  .editor-toolbar button:hover {
+    background-color: #e6e6e6;
+  }
+
+  .editor-toolbar button.active {
+    background-color: #ddd;
+  }
+
+  .editor-content {
+    padding: 10px;
+    border: 1px solid #ddd;
+    min-height: 200px;
+    resize: vertical;
+  }
+
+  .tab-content {
+    padding: 20px;
+  }
+  .list-group {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .list-group-item {
+    display: inline-block;
+  }
+
+  .my-nav-tabs {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .my-nav-tabs li {
+    margin-right: 20px;
+  }
+
+  .my-nav-tabs li a {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    color: #333;
+  }
+
+  .my-nav-tabs li a.active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+  }
+
+  .my-tab-content {
+    padding: 20px 0;
+  }
+
+  .my-tab-pane {
+    display: none;
+  }
+
+  .my-tab-pane.active {
+    display: block;
+  }

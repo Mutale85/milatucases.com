@@ -1,0 +1,199 @@
+:root {
+    --primary-color: #00aaff;
+    --secondary-color: #003366;
+}
+body {
+    /*font-family: Arial, sans-serif;*/
+}
+a:link, a:active {
+    text-decoration: none;
+}
+.top-bar {
+    background-color: #f8f9fa;
+    padding: 15px 0;
+    font-size: 0.9rem;
+}
+.navbar {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.nav-link {
+    color: #333;
+}
+.btn-login, .btn-signup {
+    border-radius: 20px;
+    padding: 8px 20px;
+}
+.btn-login {
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+.btn-signup {
+    background-color: var(--primary-color);
+    color: white;
+}
+.hero {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 150px 0;
+}
+.others {
+    background-color: var(--primary-color);
+    color: white;
+}
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+.hero p {
+    font-size: 1.2rem;
+}
+.btn-watch-video, .btn-learn-more {
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+}
+.btn-watch-video {
+    background-color: white;
+    color: var(--primary-color);
+}
+.btn-learn-more {
+    background-color: var(--secondary-color);
+    color: white;
+}
+.btn-learn-more:hover {
+    border: 3px solid;
+    border-color: var(--secondary-color);
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 0;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    transition: .5s ease-in-out;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.navbar-toggler span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: var(--primary-color);
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+
+.navbar-toggler span:nth-child(1) {
+    top: 0px;
+}
+
+.navbar-toggler span:nth-child(2),
+.navbar-toggler span:nth-child(3) {
+    top: 8px;
+}
+
+.navbar-toggler span:nth-child(4) {
+    top: 16px;
+}
+
+.navbar-toggler.open span:nth-child(1) {
+    top: 8px;
+    width: 0%;
+    left: 50%;
+}
+
+.navbar-toggler.open span:nth-child(2) {
+    transform: rotate(45deg);
+}
+
+.navbar-toggler.open span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+.navbar-toggler.open span:nth-child(4) {
+    top: 8px;
+    width: 0%;
+    left: 50%;
+}
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.tilted-image {
+    transform: rotate(-10deg);
+    transition: transform 0.5s ease-in-out;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.tilted-image:hover {
+    transform: rotate(0deg);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .tilted-image {
+        transform: rotate(0deg);
+        border-radius: 0px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    }  
+}
+
+/*snow falll*/
+.snow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  animation: snow 5s linear infinite;
+}
+
+@keyframes snow {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, 100vh);
+  }
+}
+
+/* Bubble effect */
+.bubble {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: bubble 3s linear infinite;
+}
+
+@keyframes bubble {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -100vh) scale(0.5);
+    opacity: 0;
+  }
+}

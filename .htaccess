@@ -1,0 +1,19 @@
+Options +MultiViews
+
+RewriteEngine On
+RewriteBase /
+
+# Rewrite URL to example.php?id=some-value
+RewriteRule ^id/([^/.]+)/?$ example.php?id=$1 [NC,L]
+
+# Redirect .php requests to their non-.php equivalents (e.g., example.php -> /example)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*?)/?$ $1.php [NC,L]
+
+# Ignore directory listings
+IndexIgnore *
+
+# Catch-all rule to append .php if a file exists
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*?)/?$ $1.php [NC,L]
