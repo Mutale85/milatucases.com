@@ -2,7 +2,7 @@
     session_start();
     $PASS = "Javeria##2019";
     $USER = "MutaleMulenga";
-    $dbname = "mila_MilatucasesDb";
+    $dbname = "mila_milatuCases";
 
 	try {
         // Attempt to connect to the database

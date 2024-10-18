@@ -28,18 +28,31 @@
           				<div class="row">
 	                    <div class="col-md-12">
 	                        
+<<<<<<< HEAD
+	                        <button type="button" id="adminBtn" data-id="<?php echo $_SESSION['parent_id']?>" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#userModal">
+	                            <i class="bi bi-file-pdf"></i> Upload Files
+	                        </button>
+=======
 	                        <h5 class="card-title">Documents Library</h5>
+>>>>>>> 69d745e31 (updates)
 
 	                        <div class="card card-outline-warning">
 	                            <div class="card-header">
 	                                <div class="row">
 	                                    <div class="col">
+<<<<<<< HEAD
+	                                        <h5 class="card-title">File Upload</h5>
+	                                    </div>
+	                                    <div class="col-auto">
+	                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createFolderModal"><i class="bi bi-folder"></i> Create Folder</button>
+=======
 	                                    	<button type="button" id="adminBtn" data-id="<?php echo $_SESSION['parent_id']?>" class="btn btn-primary btn-sm mb-4" data-bs-toggle="modal" data-bs-target="#userModal">
 								                            <i class="bi bi-file-pdf"></i> Upload Files
 								                        </button>
 	                                    </div>
 	                                    <div class="col-auto">
 	                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createFolderModal"><i class="bi bi-folder"></i> Create A Folders</button>
+>>>>>>> 69d745e31 (updates)
 	                                    </div>
 	                                </div>
 	                            </div>

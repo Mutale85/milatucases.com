@@ -376,7 +376,7 @@
         return $row ? $row['currency'] : null;
     }
 
-     
+    
     function getClientNameByTPIN($lawFirmId, $client_tpin) {
         global $connect;
         $stmt = $connect->prepare("SELECT * FROM `lawFirmClients` WHERE `lawFirmId` = ? AND `client_tpin` = ? ");
@@ -397,7 +397,6 @@
 
     function getClientNameById($clientId, $lawFirmId) {
         global $connect;
-
         try {
             $stmt = $connect->prepare("SELECT * FROM `lawFirmClients` WHERE id = ? AND `lawFirmId` = ? ");
             $stmt->execute([$clientId, $lawFirmId]);
@@ -412,7 +411,6 @@
             } else {
                 return null;
             }
-
         } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();
             return null;
@@ -421,7 +419,6 @@
 
     function getClientTpinById($clientId, $lawFirmId) {
         global $connect;
-
         try {
             $stmt = $connect->prepare("SELECT * FROM `lawFirmClients` WHERE id = ? AND `lawFirmId` = ? ");
             $stmt->execute([$clientId, $lawFirmId]);
@@ -441,7 +438,6 @@
         }
     }
     
-
 
     function fetchLawFirmClients() {
         global $connect;
@@ -466,7 +462,7 @@
             } elseif ($kyc == '1') {
                 $action = '<small><span class="badge bg-label-success me-1">Sent</span></small>';
             } elseif ($kyc == '2') {
-                $action = '<small><a href="'.($clientType === 'Corporate' ? 'cc/kyccorporate?cc=' : 'cc/kycindividual?cc=').base64_encode($clientId).'"><span class="badge bg-label-primary me-1">Received HERE </span></a></small>';
+                $action = '<small><a href="'.($clientType === 'Corporate' ? 'cc/kyccorporate?cc=' : 'cc/kycindividual?cc=').base64_encode($clientId).'"><span class="badge bg-label-success me-1">VIEW </span></a></small>';
             }
 
             ?>
@@ -494,8 +490,8 @@
                 <?php if ($_SESSION['user_role'] === 'superAdmin' || $_SESSION['userJob'] == 'Admin Officer' || $_SESSION['userJob'] == 'Secretary'): ?>
                 <td>
                     <div class="btn-group">
-                        <button class="btn btn-primary btn-sm editClient" href="#" data-id="<?php echo encrypt($clientId); ?>"><i class="bi bi-pen"></i> Edit</button>
-                        <button class="btn btn-danger btn-sm removeClient" href="#" data-id="<?php echo encrypt($clientId); ?>"><i class="bi bi-trash2"></i> Remove</button>
+                        <button class="btn btn-primary btn-sm editClient" href="#" data-id="<?php echo encrypt($clientId); ?>"><i class="bi bi-pen"></i> </button>
+                        <button class="btn btn-danger btn-sm removeClient" href="#" data-id="<?php echo encrypt($clientId); ?>"><i class="bi bi-trash2"></i> </button>
                     </div>
                 </td>
                 <?php else: ?>
@@ -510,7 +506,7 @@
                         data-tpin="<?php echo encrypt($Tpin); ?>" 
                         data-bname="<?php echo $clientType === 'Corporate' ? $bName : ''; ?>" 
                         data-type="<?php echo $clientType; ?>"> 
-                        <i class="bi bi-send"></i> Send KYC
+                        <i class="bi bi-send"></i>  KYC
                     </button>
                 </td>
             </tr>
@@ -570,7 +566,7 @@
                         data-tpin="<?php echo encrypt($clientTpin); ?>" 
                         data-bname="<?php echo $bName; ?>" 
                         data-type="Corporate"> 
-                        <i class="bi bi-send"></i> Send KYC
+                        <i class="bi bi-send"></i> KYC
                     </button>
                 </td>
             </tr>
@@ -614,8 +610,8 @@
                 <?php if ($_SESSION['user_role'] === 'superAdmin' || $_SESSION['userJob'] == 'Admin Officer' || $_SESSION['userJob'] == 'Secretary'): ?>
                 <td>
                     <div class="btn-group">
-                        <button class="btn btn-primary btn-sm editClient" href="#" data-id="<?php echo encrypt($clientId); ?>"><i class="bi bi-pen"></i> Edit</button>
-                        <button class="btn btn-danger btn-sm removeClient" href="#" data-id="<?php echo encrypt($clientId); ?>"><i class="bi bi-trash2"></i> Remove</button>
+                        <button class="btn btn-primary btn-sm editClient" href="#" data-id="<?php echo encrypt($clientId); ?>"><i class="bi bi-pen"></i> </button>
+                        <button class="btn btn-danger btn-sm removeClient" href="#" data-id="<?php echo encrypt($clientId); ?>"><i class="bi bi-trash2"></i> </button>
                     </div>
                 </td>
                 <?php else: ?>
@@ -629,7 +625,7 @@
                         data-firm="<?php echo encrypt($lawFirmId); ?>" 
                         data-tpin="<?php echo encrypt($clientTpin); ?>" 
                         data-type="Individual"> 
-                        <i class="bi bi-send"></i> Send KYC
+                        <i class="bi bi-send"></i> KYC
                     </button>
                 </td>
             </tr>

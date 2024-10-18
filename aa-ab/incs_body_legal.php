@@ -52,6 +52,11 @@
                   <h3>BILLABLE TIME</h3>
                   <p><?php echo $time?></p>
                 </a>
+                <a href="ai-features/" class="cards earnings-total">
+                    
+                  <h3>A.I</h3>
+                  <p>Everything A.I</p>
+                </a>
             </div>
         </div>
     </div>
