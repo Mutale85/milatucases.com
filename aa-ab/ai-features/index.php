@@ -67,21 +67,21 @@
 
           					<!-- AI-Powered Time Tracking Link -->
           					<div class="ai-link-box">
-          						<a href="ai-features/time-tracking.php">AI-Powered Time Tracking</a>
-          						<p>Automatically track billable hours based on user activity.</p>
+          						<a href="ai-features/time-entries">Analyse Time Entry</a>
+          						<p>Automatically anylyse all the time enties and AI driven insights.</p>
           					</div>
 
           					<!-- Smart Task Management Link -->
-          					<div class="ai-link-box">
-          						<a href="ai-features/task-management.php">Smart Task Management</a>
+          					<!-- <div class="ai-link-box">
+          						<a href="ai-features/task-management.php">Automate </a>
           						<p>Manage and prioritize tasks intelligently with AI-driven insights.</p>
-          					</div>
+          					</div> -->
 
           					<!-- Predictive Analytics Link -->
-          					<div class="ai-link-box">
+          					<!-- <div class="ai-link-box">
           						<a href="ai-features/predictive-analytics.php">Predictive Analytics</a>
           						<p>Analyze past cases and client data to predict case outcomes.</p>
-          					</div>
+          					</div> -->
           					
           				</div>
 

@@ -11,7 +11,7 @@
 	<title>Document Generation</title>
 	<?php include '../addon_header.php'; ?>
 	<style>
-        #docResult {
+        #generatedDocument {
             white-space: pre-wrap;
             font-family: 'Courier New', Courier, monospace;
             background-color: #f8f9fa;
@@ -22,15 +22,7 @@
             max-height: 500px;
             overflow-y: auto;
         }
-        .copy-btn {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            padding: 0.25rem 0.5rem;
-            font-size: 0.875rem;
-            line-height: 1.5;
-            border-radius: 0.2rem;
-        }
+        
     </style>
 </head>
 <body>
@@ -41,54 +33,71 @@
           		<?php include '../addon_top_nav.php'; ?>
           		<div class="content-wrapper">
           			<div class="container-xxl flex-grow-1 container-p-y">
-					    <h4 class="fw-bold py-3 mb-4 border-bottom">AI Document Generation</h4>
-					    <!-- <div id="docResult" class="mt-4 mb-4"></div> -->
-
-					    <div class="position-relative mt-4 mb-5">
-				            <div id="docResult"></div>
-				            <button id="copyBtn" class="btn btn-secondary btn-sm copy-btn" style="display: none;"><i class="bi bi-copy"></i> Copy</button>
-				        </div>
-
-					    <form id="docGenerationForm">
-					        <div class="mb-3">
-					            <label for="docType" class="form-label">Select Document Type</label>
-					            <select id="docType" name="docType" class="form-select" required>
-					                <option value="contract">Contract</option>
-					                <option value="NDA">Non-Disclosure Agreement</option>
-					                <option value="employment">Employment Agreement</option>
-					                <option value="proposal">Business Proposal</option>
-					                <option value="MOU">Memorandum of Understanding</option>
-					                <option value="lease">Lease Agreement</option>
-                                    <option value="memo">Legal Memo</option>
-                                    <option value="demand letter">Demand Letter</option>
-                                    <option value="pleading">Pleading</option>
-                                    <option value="legal brief">Legal Brief</option>
-                                    <option value="agreement">Agreement</option>
-                                    <option value="affidavit">Affidavit</option>
-                                    <option value="motion">Motion</option>
-					                <option value="custom">Custom Document</option>
-					            </select>
-					        </div>
-					        <div class="mb-3" id="customDocTypeDiv" style="display: none;">
-					            <label for="customDocType" class="form-label">Custom Document Type</label>
-					            <input type="text" class="form-control" id="customDocType" name="customDocType">
-					        </div>
-					        <div class="mb-3">
-					            <label for="selected_client_tpin" class="form-label">Client Name</label>
-					            <div class="input-group">
-				                	<select class="form-select" id="selected_client_tpin" name="clientId" required></select>
-				                </div>
-					        </div>
-					        <div class="mb-3">
-					            <label for="startDate" class="form-label">Start Date</label>
-					            <input type="date" class="form-control" id="startDate" name="startDate" required>
-					        </div>
-					        <div class="mb-3">
-					            <label for="description" class="form-label">Description</label>
-					            <textarea id="description" name="description" class="form-control" rows="4" placeholder="Enter specific terms or leave it to AI"></textarea>
-					        </div>
-					        <button type="submit" class="btn btn-primary" id="generateBtn">Generate Document</button>
-					    </form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Generated Docs</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="fetchGeneratedDocs"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+        					    
+                                <h4 class="mb-0 card-title border-bottom pb-3">AI Document Generator</h4>
+                                <div id="generatedDocumentSection" class="mt-4 mb-5" style="display: none;">                                    
+                                    <div id="generatedDocument" class="border p-3 bg-light"></div>
+                                    <button id="copyBtn" class="btn btn-sm btn-outline-primary copy-btn">
+                                        <i class="bi bi-clipboard"></i> Copy
+                                    </button>
+                                    <button id="retryBtn" class="btn btn-primary btn-sm">
+                                        <i class="bi bi-arrow-repeat me-1"></i> Retry
+                                    </button>
+                                </div>
+        					    <form id="docGenerationForm">
+        					        <div class="mb-3">
+        					            <label for="docType" class="form-label">Select Document Type</label>
+        					            <select id="docType" name="docType" class="form-select" required>
+        					                <option value="contract">Contract</option>
+        					                <option value="NDA">Non-Disclosure Agreement</option>
+        					                <option value="employment">Employment Agreement</option>
+        					                <option value="proposal">Business Proposal</option>
+        					                <option value="MOU">Memorandum of Understanding</option>
+        					                <option value="lease">Lease Agreement</option>
+                                            <option value="memo">Legal Memo</option>
+                                            <option value="demand letter">Demand Letter</option>
+                                            <option value="pleading">Pleading</option>
+                                            <option value="legal brief">Legal Brief</option>
+                                            <option value="agreement">Agreement</option>
+                                            <option value="affidavit">Affidavit</option>
+                                            <option value="motion">Motion</option>
+        					                <option value="custom">Custom Document</option>
+        					            </select>
+        					        </div>
+        					        <div class="mb-3" id="customDocTypeDiv" style="display: none;">
+        					            <label for="customDocType" class="form-label">Custom Document Type</label>
+        					            <input type="text" class="form-control" id="customDocType" name="customDocType">
+        					        </div>
+        					        <div class="mb-3">
+        					            <label for="selected_client_tpin" class="form-label">Client Name</label>
+        					            <div class="input-group">
+        				                	<select class="form-select" id="selected_client_tpin" name="clientId" required></select>
+        				                </div>
+        					        </div>
+        					        <div class="mb-3">
+        					            <label for="startDate" class="form-label">Start Date</label>
+        					            <input type="date" class="form-control" id="startDate" name="startDate" required>
+        					        </div>
+        					        <div class="mb-3">
+        					            <label for="description" class="form-label">Description</label>
+        					            <textarea id="description" name="description" class="form-control" rows="4" placeholder="Enter specific terms or leave it to AI"></textarea>
+        					        </div>
+        					        <button type="submit" class="btn btn-primary" id="generateBtn">Generate Document</button>
+        					    </form>
+                            </div>
+                        </div>
 					</div>
           			<?php include '../addon_footer.php';?>
           			<div class="content-backdrop fade"></div>
@@ -138,9 +147,79 @@
 		  });
 		}
 
-    	fetchLawFirmClients();
-        
-	    $(document).ready(function() {
+    	
+        function generateDocument(formData, isRetry = false) {
+            var $form = $('#docGenerationForm');
+            var $button = $('#generateBtn');
+            var $result = $('#generatedDocument');
+            var $copyBtn = $('#copyBtn');
+            var $retryBtn = $('#retryBtn');
+
+            $button.prop('disabled', true).text('Generating...');
+            if (!isRetry) {
+                $result.empty();
+            }
+            $copyBtn.hide();
+            $retryBtn.hide();
+
+            $.ajax({
+                url: 'ai-features/parsers/ai_document_generate',
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+
+                    if (response.success && response.chunks) {
+                        $("#generatedDocumentSection").show();
+                        var i = 0;
+                        function typeNextChunk() {
+                            if (i < response.chunks.length) {
+                                if (response.chunks[i] === "\n") {
+                                    $result.append('<br>');
+                                } else {
+                                    $result.append(response.chunks[i]);
+                                }
+                                i++;
+                                setTimeout(typeNextChunk, 20);
+                            } else {
+                                $button.prop('disabled', false).text('Generate Document');
+                                $copyBtn.show();
+                                $retryBtn.show().data('generationId', response.generationId);
+                                if (!isRetry) {
+                                    $form[0].reset();
+                                }
+                            }
+                        }
+                        typeNextChunk();
+                        fetchGeneratedData();
+                    } else {
+                        var errorMessage = response.error || 'Unknown error occurred';
+                        $result.html('<div class="alert alert-danger">Error: ' + errorMessage + '</div>');
+                        $button.prop('disabled', false).text('Generate Document');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", status, error);
+                    console.log("Response:", xhr.responseText);
+                    var errorMessage = "An error occurred. Please try again.";
+                    if (xhr.responseText) {
+                        try {
+                            var jsonResponse = JSON.parse(xhr.responseText);
+                            if (jsonResponse.error) {
+                                errorMessage += " Error details: " + jsonResponse.error;
+                            }
+                        } catch (e) {
+                            errorMessage += " Unable to parse error details.";
+                        }
+                    }
+                    $result.html('<div class="alert alert-danger">' + errorMessage + '</div>');
+                    $button.prop('disabled', false).text('Generate Document');
+                }
+            });
+        }
+
+        fetchLawFirmClients();
+        $(document).ready(function() {
             $('#docType').change(function() {
                 if ($(this).val() === 'custom') {
                     $('#customDocTypeDiv').show();
@@ -151,76 +230,65 @@
 
             $('#docGenerationForm').submit(function(e) {
                 e.preventDefault();
-                var $form = $(this);
-                var $button = $('#generateBtn');
-                var $result = $('#docResult');
-                var $copyBtn = $('#copyBtn');
-
-                $button.prop('disabled', true).text('Generating...');
-                $result.empty();
-                $copyBtn.hide();
-
-                $.ajax({
-                    url: 'ai-features/parsers/ai_document_generate',
-                    type: 'POST',
-                    data: $form.serialize(),
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success && response.chunks) {
-                            var i = 0;
-                            function typeNextChunk() {
-                                if (i < response.chunks.length) {
-                                    if (response.chunks[i] === "\n") {
-                                        $result.append('<br>');
-                                    } else {
-                                        $result.append(response.chunks[i]);
-                                    }
-                                    i++;
-                                    setTimeout(typeNextChunk, 20); // Adjusted timing for smoother effect
-                                } else {
-                                    $button.prop('disabled', false).text('Generate Document');
-                                    $copyBtn.show();
-                                    $form[0].reset();
-                                }
-                            }
-                            typeNextChunk();
-                        } else {
-                            var errorMessage = response.error || 'Unknown error occurred';
-                            $result.html('<div class="alert alert-danger">Error: ' + errorMessage + '</div>');
-                            $button.prop('disabled', false).text('Generate Document');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("AJAX Error:", status, error);
-                        console.log("Response:", xhr.responseText);
-                        var errorMessage = "An error occurred. Please try again.";
-                        if (xhr.responseText) {
-                            try {
-                                var jsonResponse = JSON.parse(xhr.responseText);
-                                if (jsonResponse.error) {
-                                    errorMessage += " Error details: " + jsonResponse.error;
-                                }
-                            } catch (e) {
-                                errorMessage += " Unable to parse error details.";
-                            }
-                        }
-                        $result.html('<div class="alert alert-danger">' + errorMessage + '</div>');
-                        $button.prop('disabled', false).text('Generate Document');
-                    }
-                });
+                generateDocument($(this).serialize());
             });
 
             $('#copyBtn').click(function() {
                 var $temp = $("<textarea>");
                 $("body").append($temp);
-                $temp.val($('#docResult').text()).select();
+                $temp.val($('#generatedDocument').text()).select();
                 document.execCommand("copy");
                 $temp.remove();
                 
                 $(this).text('Copied!');
                 setTimeout(() => {
-                    $(this).text('Copy');
+                    $(this).html('<i class="bi bi-clipboard"></i> Copy');
                 }, 2000);
+            });
+
+            $('#retryBtn').click(function() {
+                var generationId = $(this).data('generationId');
+                generateDocument($('#docGenerationForm').serialize() + '&generationId=' + generationId, true);
+            });
+        });
+
+        function fetchGeneratedData(){
+            var fetchGeneratedDocs = "fetchGeneratedDocs";
+            $.ajax({
+                url: 'ai-features/parsers/fetchAiGeneratedDocs',
+                method:"POST", 
+                data:{fetchGeneratedDocs:fetchGeneratedDocs},
+                success: function(data) {
+                    $('#fetchGeneratedDocs').html(data);
+                }
+                
+            });
+        }
+        fetchGeneratedData();
+
+        $(document).on('click', '.showDocument', function(e) {
+            e.preventDefault();
+            var docId = $(this).data('doc-id');             
+            $.ajax({
+                url: 'ai-features/parsers/getGeneratedDocument',
+                method: 'POST',
+                data: { docId: docId },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        $('#generatedDocument').html(response.document);
+                        $('#generatedDocumentSection').show();
+                        $("#retryBtn").hide();                          
+                        $('html, body').animate({
+                            scrollTop: $("#generatedDocumentSection").offset().top
+                        }, 500);
+                    } else {
+                        sweetSuccess('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    sweetError('Error fetching the document. Please try again.');
+                }
             });
         });
 	</script>

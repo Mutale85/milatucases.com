@@ -2932,17 +2932,11 @@
     function generateDocument($documentType, $prompt) {
         $apiKey = SECRET_KEY;
         $url = 'https://api.openai.com/v1/chat/completions';
-
-        // Construct the full prompt
         $fullPrompt = "Generate a {$documentType} based on the following description: {$prompt}\n\n";
-
-        // Set headers for the API request
         $headers = [
             'Content-Type: application/json',
             'Authorization: ' . 'Bearer ' . $apiKey
         ];
-
-        // Prepare the data payload for the API request
         $data = [
             'model' => 'gpt-4',  // or 'gpt-4' if you have access
             'messages' => [
@@ -2952,33 +2946,21 @@
             'max_tokens' => 1000,
             'temperature' => 0.7,
         ];
-
-        // Initialize cURL session
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        // Execute the API call
         $response = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-
-        // Check for cURL errors
         if ($err) {
             return "cURL Error: " . $err;
         } 
-
-        // Decode the response
         $responseData = json_decode($response, true);
-
-        // Check for API or response errors
         if (isset($responseData['error'])) {
             return "API Error: " . $responseData['error']['message'];
         }
-
-        // Return the generated document content or handle any missing fields
         return $responseData['choices'][0]['message']['content'] ?? "Error: Unable to generate document";
     }
 
@@ -2990,13 +2972,42 @@
 
     function convertMarkdownToHtml($text) {
         $text = preg_replace('/(\*\*|__)(.+?)\1/', '<strong>$2</strong>', $text);
-        
-        // Convert italic (*text* or _text_)
-        $text = preg_replace('/(\*|_)(.+?)\1/', '<em>$2</em>', $text);
-        
-        // Convert line breaks
+        $text = preg_replace('/(\*|_)(.+?)\1/', '<em>$2</em>', $text);        
         $text = nl2br($text);
-        
         return $text;
+    }
+
+    function generateDocumentContent($prompt) {
+        global $openai_api_key;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://api.openai.com/v1/chat/completions');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+            'model' => 'gpt-4o',
+            'messages' => [
+                ['role' => 'system', 'content' => 'You are a helpful assistant that generates legal documents.'],
+                ['role' => 'user', 'content' => $prompt]
+            ],
+            'max_tokens' => 1000,
+            'temperature' => 0.7,
+        ]));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $openai_api_key
+        ]);
+
+        $response = curl_exec($ch);
+        if (curl_errno($ch)) {
+            throw new Exception('cURL Error: ' . curl_error($ch));
+        }
+        curl_close($ch);
+
+        $decoded = json_decode($response, true);
+        if (isset($decoded['choices'][0]['message']['content'])) {
+            return $decoded['choices'][0]['message']['content'];
+        } else {
+            throw new Exception('Failed to generate content: ' . print_r($decoded, true));
+        }
     }
 ?>
