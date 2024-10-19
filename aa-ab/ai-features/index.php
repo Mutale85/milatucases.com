@@ -57,16 +57,16 @@
           			<div class="container-xxl flex-grow-1 container-p-y">
           				
           				<!-- AI Links Section -->
-          				<div class="ai-links-container">
+          				<div class="row">
           					
           					<!-- Automated Document Generation Link -->
-          					<div class="ai-link-box">
+          					<div class="ai-link-box col-md-6">
           						<a href="ai-features/document-generation">Automated Document Generation</a>
           						<p>Create legal documents using templates and client data instantly.</p>
           					</div>
 
           					<!-- AI-Powered Time Tracking Link -->
-          					<div class="ai-link-box">
+          					<div class="ai-link-box col-md-6">
           						<a href="ai-features/time-entries">Analyse Time Entry</a>
           						<p>Automatically anylyse all the time enties and AI driven insights.</p>
           					</div>
